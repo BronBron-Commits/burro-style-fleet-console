@@ -51,3 +51,13 @@ This project models real-world problems in robotics and fleet management systems
 - Backend API + React Query integration
 - Persistent geofence storage
 - Multi-user operator view
+
+## Role Alignment
+
+This prototype was built to demonstrate core frontend patterns used in autonomous fleet management systems:
+
+- real-time robot telemetry visualization
+- map-driven operator workflows
+- geofence rendering and zone awareness
+- data-dense UI state updates
+- spatial decision-support tooling
