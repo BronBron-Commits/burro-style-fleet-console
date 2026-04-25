@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
+import type { LatLngExpression } from "leaflet"
 import L from "leaflet"
+import "leaflet/dist/leaflet.css"
 
 import { initialRobots, type Robot } from "../data/robots"
 import GeofenceLayer, { demoZone } from "./GeofenceLayer"
@@ -10,6 +11,8 @@ import { isInsidePolygon } from "../utils/geo"
 type FleetMapProps = {
   onSelect: (robot: Robot) => void
 }
+
+const mapCenter: LatLngExpression = [39.9526, -75.1652]
 
 const greenIcon = new L.Icon({
   iconUrl: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
@@ -24,7 +27,6 @@ const blueIcon = new L.Icon({
 export default function FleetMap({ onSelect }: FleetMapProps) {
   const [robots, setRobots] = useState<Robot[]>(initialRobots)
 
-  // Simulate live telemetry
   useEffect(() => {
     const interval = window.setInterval(() => {
       setRobots((prev) =>
@@ -53,27 +55,20 @@ export default function FleetMap({ onSelect }: FleetMapProps) {
   }, [])
 
   return (
-    <MapContainer
-      center={[39.9526, -75.1652]}
-      zoom={13}
-      className="h-full w-full"
-    >
+    <MapContainer center={mapCenter} zoom={13} className="h-full w-full">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-      {/* Geofence */}
       <GeofenceLayer />
 
-      {/* Robots */}
       {robots.map((robot) => {
-        const inside = isInsidePolygon(
-          [robot.lat, robot.lng],
-          demoZone
-        )
+        const inside = isInsidePolygon([robot.lat, robot.lng], demoZone)
+
+        const markerPosition: LatLngExpression = [robot.lat, robot.lng]
 
         return (
           <Marker
             key={robot.id}
-            position={[robot.lat, robot.lng]}
+            position={markerPosition}
             icon={inside ? greenIcon : blueIcon}
             eventHandlers={{
               click: () => onSelect(robot),
