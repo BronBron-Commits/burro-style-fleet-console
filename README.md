@@ -36,7 +36,14 @@ This project models real-world problems in robotics and fleet management systems
 
 ## Screenshots
 
-(Add your screenshots here)
+### Fleet Overview
+![Overview](screenshots/overview.png)
+
+### Robot Selected
+![Selected](screenshots/selected.png)
+
+### Zone Awareness
+![Inside Zone](screenshots/inside-zone.png)
 
 ## Future Improvements
 
