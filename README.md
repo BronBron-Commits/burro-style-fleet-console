@@ -43,7 +43,7 @@ This project models real-world problems in robotics and fleet management systems
 ![Selected](screenshots/selected.png)
 
 ### Zone Awareness
-![Inside Zone](screenshots/inside-zone.png)
+![Outside Zone](screenshots/outside-zone.png)
 
 ## Future Improvements
 
